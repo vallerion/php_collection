@@ -1,0 +1,10 @@
+{
+    "name": "test/collection",
+    "description": "php collection lib",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Collection\\": "Collection"
+        }
+    }
+}
