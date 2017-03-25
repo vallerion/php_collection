@@ -2,6 +2,9 @@
     "name": "test/collection",
     "description": "php collection lib",
     "require": {},
+    "require-dev": {
+        "codeclimate/php-test-reporter": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Collection\\": "Collection"
