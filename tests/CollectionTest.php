@@ -176,13 +176,19 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
 
         $array = [
             'foo' => 'bar',
-            'php' => 7
+            'php' => [
+                6 => false,
+                7 => true
+            ],
+            'object' => new class() {
+                protected $foo = 'bar';
+            }
         ];
 
         $copyArray = $method->invoke($this->collection, $array);
 
         $this->assertEquals($array, $copyArray);
-        $this->assertSame($array, $copyArray);
+        $this->assertNotSame($array, $copyArray);
 
 
         array_push($array, [ 'bar?' => 'foo!' ]);
@@ -324,6 +330,29 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
         $this->assertInternalType('string', $itemsAsJson);
         $this->assertSame($items, $itemsAsJson);
         $this->assertJson($itemsAsJson);
+    }
+
+    public function testGetItemsAsArray() {
+
+
+        $method = $this->class->getMethod('getItemsAsArray');
+        $method->setAccessible(true);
+
+        $array = [
+            'foo' => 'bar'
+        ];
+
+        $items = $method->invoke($this->collection, $array);
+        $this->assertInternalType('array', $items);
+        $this->assertSame($array, $items);
+
+        
+
+        $collection = new Collection($array);
+
+        $items = $method->invoke($this->collection, $collection);
+        $this->assertInternalType('array', $items);
+        $this->assertSame($array, $items);
     }
 
 

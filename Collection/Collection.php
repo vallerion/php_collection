@@ -42,8 +42,6 @@ class Collection implements CollectionInterface {
             return $items->all();
         else if($items instanceof Arrayable)
             return $items->toArray();
-        else if($items instanceof Jsonable)
-            return $items->toJson();
         else if($items instanceof Traversable)
             return iterator_to_array($items);
 
